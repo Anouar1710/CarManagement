@@ -12,12 +12,9 @@ export function Carproduct(props) {
 	const [voiture, setIdV] = useState("");
 	const [client, setIdC] = useState("");
 	const commander = async (idVoiture, idVendeur) => {
-		
-		const response = await axios.post(`http://localhost:3002/sales/commander?id=${idVoiture}` , idVendeur) 
-		console.log(response.data);
-		console.log(props.Id)
-		console.log(props.Idv)
-	}
+    const response = await axios.post(`http://localhost:3002/sales/commander?id=${idVoiture}`, { idVendeur, storedId });
+ 
+}
 	
     return (
         <div className='car-card-01'>
@@ -29,9 +26,9 @@ export function Carproduct(props) {
             <div className='prix-car'>{props.prix}</div>
             <div>
             {storedUserType==="client"?(
-				<button className="voir-annonce" onclick={commander(props.Id, props.Idv)}>                   
-                        <div className="getstarted-text">Commander</div>                   
-                </button>
+				<button className="voir-annonce" onClick={() => commander(props.Id, props.Idv)}>
+					<div className="getstarted-text">Commander</div>
+				</button>
 				):(
 				<button className="voir-annonce">
                     <Link to="/Boutique">

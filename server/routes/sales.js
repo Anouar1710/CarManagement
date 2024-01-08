@@ -3,19 +3,18 @@ const salesModel= require('../model/sales')
 const router= express.Router()
 
 
+
 router.post('/commander',async (req,res)=>{
-	const { idV } = req.query;
-	const idC = req.body;
-	const idVoiture = JSON.stringify(idV);
-	const idClient = JSON.stringify(idC);
-	
-	console.log(idVoiture);
-	console.log(idClient);
+	const { idVoiture } = req.query;
+	const idVendeur = req.body.idVendeur;
+	const idClient = req.body.storedId;
 	
 	
-	const newSale = await salesModel.create({                             
-      idV: idVoiture,
-      idC: idClient,
+	
+	const newSale = await salesModel.create({     
+	  idVoiture: idVoiture,                     
+      idClient: idClient,
+      idVendeur: idVendeur,
     });
 	
 	res.status(201).json(newSale);

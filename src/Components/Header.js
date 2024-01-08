@@ -19,13 +19,7 @@ const Header = () => {
           </li>
           <li>
             <a href="/contact">Contact</a>
-          </li>
-          <li>
-            <a href="/Admin">Admin</a>
-          </li>
-          <li>
-            <a href="/Vendeur">Vendeur</a>
-          </li>
+          </li>                  
           <li>
             <a href="#">About us</a>
           </li>
