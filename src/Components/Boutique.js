@@ -37,7 +37,7 @@ const Boutique = () => {
         <div>
             {storedUserType === "client" ? <HeaderClient /> : (storedUserType === "seller" ? <HeaderVendeur /> : <Header />)}
             <div className='big-title-boutique'>Une large sélection de véhicules</div>
-            <div className='card-ourcars'>
+            <div className='card-ourcars ml-24' >
                 {cars.map((car)=>(
                      carsImage.keys().includes(`./${car.Brand}.png`)?
                      (

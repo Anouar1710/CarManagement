@@ -18,6 +18,7 @@ import SubscribeForm from "./Components/Subscribe";
 import Boutique from "./Components/Boutique";
 import Panier from "./Components/Panier";
 import Error from "./Components/error";
+import PredictionForm from "./Components/PredictForm";
 function App() {
 
   return (
@@ -38,6 +39,7 @@ function App() {
         <Route path="/Subscribe" element={<SubscribeForm />} />
         <Route path="/Boutique" element={<Boutique />} />
         <Route path="/Panier" element={<Panier />} />
+        <Route path="/Predict" element={<PredictionForm />} />
         <Route path="*" element={<Error />} />
       </Routes>
       

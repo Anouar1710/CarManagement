@@ -35,7 +35,7 @@ function SidebarVendeur() {
           </Link>
         </li>
         <li className="mb-2">
-          <Link to="/" className="flex items-center text-white hover:bg-gray-800 py-2 px-4 rounded">
+          <Link to="/Predict" className="flex items-center text-white hover:bg-gray-800 py-2 px-4 rounded">
             <BarChart2 size={20} className="mr-2" />
             Prices Estimation
           </Link>
