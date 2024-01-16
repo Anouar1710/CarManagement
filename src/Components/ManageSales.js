@@ -1,14 +1,24 @@
 // SalesManagement.js
-import React, { useState } from 'react';
-import { Trash2, Edit, Plus } from 'react-feather';
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
+import { Trash2, Edit } from 'react-feather';
 import Sidebar from './Sidebar';
 
 const SalesManagement = () => {
-  const [sales, setSales] = useState([
-    { id: 1, marque: 'Mercedes', client: 'John Doe', vendeur: 'Salesman1', dateAchat: '2023-01-01', prix: 50000 },
-    { id: 2, marque: 'BMW', client: 'John Cena', vendeur: 'Salesman2', dateAchat: '2023-02-01', prix: 60000 },
+  const [sales, setSales] = useState([]);
 
-  ]);
+  useEffect(() => {
+    fetchSales();
+  }, []);
+
+  const fetchSales = async () => {
+    try {
+      const response = await axios.get('http://localhost:3002/sales/all-sales');
+      setSales(response.data);
+    } catch (error) {
+      console.error('Error fetching sales:', error);
+    }
+  };
 
 
   return (
@@ -19,7 +29,6 @@ const SalesManagement = () => {
 
       {/* Main content area */}
       <div className="flex-grow p-8">
-
         <h2 className="text-4xl font-extrabold text-gray-800 mb-8">Sales Management</h2>
 
         {/* Sales table */}
@@ -30,18 +39,16 @@ const SalesManagement = () => {
                 <th className="px-6 py-4">Car Model</th>
                 <th className="px-6 py-4">Client Name</th>
                 <th className="px-6 py-4">Salesman</th>
-                <th className="px-6 py-4">Purchase Date</th>
-                <th className="px-6 py-4">Price</th>
+                <th className="px-6 py-4">Purchase Date</th>                
               </tr>
             </thead>
             <tbody className="text-gray-800">
               {sales.map((sale) => (
-                <tr key={sale.id} className="border-t hover:bg-gray-50">
-                  <td className="px-6 py-4">{sale.marque}</td>
-                  <td className="px-6 py-4">{sale.client}</td>
-                  <td className="px-6 py-4">{sale.vendeur}</td>
-                  <td className="px-6 py-4">{sale.dateAchat}</td>
-                  <td className="px-6 py-4">${sale.prix.toLocaleString()}</td>                  
+                <tr key={sale._id} className="border-t hover:bg-gray-50">                  
+                  <td className="px-6 py-4">{sale.idVoiture.Brand} {sale.idVoiture.Model}</td>
+                  <td className="px-6 py-4">{sale.idClient.name}</td>
+                  <td className="px-6 py-4">{sale.idVendeur.name}</td>
+                  <td className="px-6 py-4">{new Date(sale.purchaseDate).toLocaleDateString()}</td>                  
                 </tr>
               ))}
             </tbody>

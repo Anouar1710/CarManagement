@@ -16,6 +16,7 @@ import SalesManagement from "./Components/ManageSales";
 import SalesManagementVendeur from "./Components/ManageSalesVendeur";
 import SubscribeForm from "./Components/Subscribe";
 import Boutique from "./Components/Boutique";
+import Panier from "./Components/Panier";
 import Error from "./Components/error";
 function App() {
 
@@ -36,6 +37,7 @@ function App() {
         <Route path="/SalesVendeur" element={<SalesManagementVendeur />} />
         <Route path="/Subscribe" element={<SubscribeForm />} />
         <Route path="/Boutique" element={<Boutique />} />
+        <Route path="/Panier" element={<Panier />} />
         <Route path="*" element={<Error />} />
       </Routes>
       

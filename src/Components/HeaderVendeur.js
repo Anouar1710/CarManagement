@@ -5,6 +5,7 @@ import Avatar from "./AvatarPlaceholder";
 import { Link } from "react-router-dom"; // Import Link from react-router-dom
 import "../css/Header.css"
 import { useAuth } from '../AuthContext';
+import { useNavigate } from 'react-router-dom';
 
 
 const Header = () => {

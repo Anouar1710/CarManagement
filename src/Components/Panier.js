@@ -1,21 +1,26 @@
 import React, { useEffect, useState } from 'react';
-import Header from './Header';
+import { useNavigate } from 'react-router-dom';
 import HeaderClient from "./HeaderClient";
-import HeaderVendeur from "./HeaderVendeur";
-import Search from './Search'
-import "../css/Boutique.css"
 import { Carproduct } from "./carproduct"
 import axios from 'axios';
 
-const Boutique = () => {	
+const Panier = () => {
 		const storedUser = JSON.parse(sessionStorage.getItem('user'));
 		const storedName = storedUser?.name;
 		const storedId = storedUser?.userId;
-		const storedUserType = storedUser?.userType || "visiteur";
-		const [cars,setCars]=useState([])
+		const storedUserType = storedUser?.userType;
+		const [cars,setCars]=useState([])		
+		const navigate = useNavigate();
+	
+		useEffect(() => {
+			if (!storedUserType) {   
+			navigate('/');
+			}
+		}, [storedUserType, navigate]);
+		
 		const get_cars= async()=>{
         try{
-            const res= await axios.get("http://localhost:3002/car/get-carsinfo")
+            const res= await axios.get(`http://localhost:3002/car/get-Panier?id=${storedId}`)
             console.log(res.data)
             setCars(res.data)
 
@@ -23,7 +28,7 @@ const Boutique = () => {
             console.log(e)
         }
 
-		}
+    }
     useEffect(()=>{
         get_cars()
     },[])
@@ -35,8 +40,14 @@ const Boutique = () => {
     return (
     
         <div>
-            {storedUserType === "client" ? <HeaderClient /> : (storedUserType === "seller" ? <HeaderVendeur /> : <Header />)}
-            <div className='big-title-boutique'>Une large sélection de véhicules</div>
+            <HeaderClient />
+            <div className='big-title-boutique'>
+				{storedUser ? (
+					<h1 className="text-3xl font-bold mb4">Ceci est votre panier, {storedName}</h1>
+				) : (
+					<p>Please log in</p>
+				)}              
+            </div>
             <div className='card-ourcars'>
                 {cars.map((car)=>(
                      carsImage.keys().includes(`./${car.Brand}.png`)?
@@ -48,9 +59,9 @@ const Boutique = () => {
                         Brand={car.Brand} 
                         couleur={car.Color} 
                         model = {car.Model}
-                        motorization = {car.Motorization}                     
-                        prix="190.000 DA" 
-                        />
+                        motorization = {car.Motorization}    
+                        isInPanier = {true}                 
+						/>
                         
                      ):
 
@@ -62,7 +73,8 @@ const Boutique = () => {
                      couleur={car.Color} 
                      model = {car.Model}
                      motorization = {car.Motorization}
-                     prix="190.000 DA" />)
+                     isInPanier = {true}
+                     />)
                     
                    
                 ))}
@@ -73,4 +85,4 @@ const Boutique = () => {
 
     )
 }
-export default Boutique;
+export default Panier;

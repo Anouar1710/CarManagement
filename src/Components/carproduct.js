@@ -3,12 +3,11 @@ import "../css/ourcars.css";
 import { Link } from "react-router-dom";
 import axios from 'axios'
 
-const storedUser = JSON.parse(localStorage.getItem('user'));
+const storedUser = JSON.parse(sessionStorage.getItem('user'));
 const storedId = storedUser?.userId;
 const storedUserType = storedUser?.userType || "visiteur";
 
 export function Carproduct(props) {
-	console.log(props);
 	const [voiture, setIdV] = useState("");
 	const [client, setIdC] = useState("");
 	const commander = async (idVoiture, idVendeur) => {
@@ -18,26 +17,36 @@ export function Carproduct(props) {
 	
     return (
         <div className='car-card-01'>
-            <img className='image-minicooper' src={props.Imgsrc}></img>
-            <div className='title-car'>{props.Brand}</div>
-            <div className='couleur-car'>{props.couleur}</div>
-            <div className='model-car'>{props.model}</div>
-            <div className='motorization-car'>{props.motorization}</div>
-            <div className='prix-car'>{props.prix}</div>
-            <div>
-            {storedUserType==="client"?(
-				<button className="voir-annonce" onClick={() => commander(props.Id, props.Idv)}>
-					<div className="getstarted-text">Commander</div>
-				</button>
-				):(
-				<button className="voir-annonce">
-                    <Link to="/Boutique">
-                        <div className="getstarted-text">Voir l'annonce</div>
-                    </Link>
-                </button>			
-				)}
-                
-            </div>
+            <img className='car-image' src={props.Imgsrc} alt={props.Brand} />
+      <div className='car-details'>
+        <div className='car-brand'>{props.Brand}</div>
+        <div className='car-info'>          
+          <div className='car-property'>{props.model}</div>
+          <div className='car-property'>{props.motorization}</div>
+          <div className='car-property'>{props.couleur}</div>
+        </div>
+        <div className='car-price'>{props.prix}</div>
+      </div>
+            <div className='action-buttons'>
+				{storedUserType === "client" ? (
+					props.isInPanier ? (
+					// If user is client and isInPanier is true, render nothing (no button)
+						null
+					) : (
+					// If user is client and isInPanier is not set or false, render Commander button
+						<button className="voir-annonce voir-annonce-button" onClick={() => commander(props.Id, props.Idv)}>
+							<div className="getstarted-text">Commander</div>
+						</button>
+					)
+				) : (
+					// If user is not client, render Voir l'annonce button
+					<button className="voir-annonce voir-annonce-button">
+					<Link to="/Boutique">
+					<div className="getstarted-text">Voir l'annonce</div>
+					</Link>
+					</button>
+					)}
+			</div>
         </div>
     )
 }

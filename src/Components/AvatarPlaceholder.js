@@ -2,9 +2,8 @@
 import React from 'react';
 import { useAuth } from '../AuthContext';
 
-const AvatarPlaceholder = () => {
-	//const { user, logoutUser } = useAuth();
-	const storedUser = JSON.parse(localStorage.getItem('user'));
+const AvatarPlaceholder = () => {	
+	const storedUser = JSON.parse(sessionStorage.getItem('user'));
 	const storedName = storedUser?.name;
   return (
     /* <div className="w-12 h-12 rounded-full overflow-hidden bg-gray-300">

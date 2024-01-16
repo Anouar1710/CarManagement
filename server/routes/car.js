@@ -1,6 +1,7 @@
 const express = require("express")
 const multer= require("multer")
 const carModel= require('../model/cars')
+const salesModel = require('../model/sales')
 const router= express.Router()
 
 const storage= multer.diskStorage({
@@ -16,9 +17,9 @@ const upload = multer({ storage: storage })
 router.post('/upload-car', upload.single('image'), async function (req, res, next) {
 	console.log('Received request to add car:', req.body); 
   try {
-	const idVe  = req.query;
-	const idVendeur = JSON.stringify(idVe);
+	const idVendeur  = req.query.id;	
     const { Brand, Model, Motorization, Color } = req.body;
+    const isCommanded = "false";
     let imageName = null;
 
     if (req.file) {
@@ -32,6 +33,7 @@ router.post('/upload-car', upload.single('image'), async function (req, res, nex
       Motorization,
       Color,
       idV: idVendeur,
+      isCommanded: isCommanded,
     });
 
     res.status(201).json(newCar);
@@ -82,21 +84,38 @@ router.get('/getCarById',async(req,res)=>{
 
 })
 
-router.get('/get-carsinfo',(req,res)=>{
-    carModel.find({}).then(data=>{
-      res.send(data)
-    })
-})
+router.get('/get-carsinfo', (req, res) => {
+    carModel.find({ isCommanded: false }).then(data => {
+        res.send(data);
+    }).catch(error => {
+        console.error('Error fetching cars:', error);
+        res.status(500).json({ error: 'Internal Server Error' });
+    });
+});
 
 router.get('/get-carsinfoVendeur',(req,res)=>{
-	const idV  = req.query;	
-	const id = JSON.stringify(idV);
-	console.log(id);
-	
+	const id  = req.query.id;			
     carModel.find({ idV: id }).then(data=>{
       res.send(data)
     })
 })
+
+router.get('/get-Panier', async (req, res) => {
+  const idClient = req.query.id;
+  try {
+    const sales = await salesModel.find({ idClient });
+    const carIds = sales.map((sale) => sale.idVoiture);
+    console.log(sales);
+    const cars = await carModel.find({ _id: { $in: carIds } });
+    res.send(cars);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: 'Internal Server Error' });
+  }
+});
+
+
+
 
 router.get('/delete', async (req, res) => {
   try {

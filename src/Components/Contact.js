@@ -8,7 +8,7 @@ import HeaderVendeur from "./HeaderVendeur";
 
 
 const Contact = () => {
-	const storedUser = JSON.parse(localStorage.getItem('user'));
+	const storedUser = JSON.parse(sessionStorage.getItem('user'));
 	const storedName = storedUser?.name;
 	const storedUserType = storedUser?.userType || "visiteur";
 	

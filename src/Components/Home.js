@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import Header from "./Header";
 import HeaderClient from "./HeaderClient";
 import HeaderVendeur from "./HeaderVendeur";
@@ -16,12 +17,16 @@ import { useAuth } from '../AuthContext';
 
 const Home = () => {
 	
-	//const { user, logoutUser } = useAuth();
-	const storedUser = JSON.parse(localStorage.getItem('user'));
+	const storedUser = JSON.parse(sessionStorage.getItem('user'));
 	const storedName = storedUser?.name;
 	const storedUserType = storedUser?.userType || "visiteur";
+	const navigate = useNavigate();
 	
-	console.log(storedUserType);
+  useEffect(() => {
+    if (!storedUserType) {   
+      navigate('/');
+    }
+  }, [storedUserType, navigate]);
 	
 	
 	
@@ -36,7 +41,7 @@ const Home = () => {
       <Whyus />
       <Ourcars />
       <Proposdenous />
-      <div className="container mx-auto p-8">
+      {/*<div className="container mx-auto p-8">
 
         {/*<CarouselComponent />*/}
         {/*<div className="bg-white p-8 rounded-lg shadow-lg">
@@ -55,8 +60,8 @@ const Home = () => {
         {/*<Cars />
         <div className="bg-white p-8 rounded-lg shadow-lg mt-8">
           <Contact />
+      </div>}
       </div>*/}
-      </div>
       <Footer />
     </div>
   );

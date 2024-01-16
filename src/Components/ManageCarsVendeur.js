@@ -9,7 +9,7 @@ const ManageCars = () => {
   const [searchTerm, setSearchTerm] = useState('');
   const [isAddingCar, setIsAddingCar] = useState(false);
   const [selectedCar, setSelectedCar] = useState(null);
-  const storedUser = JSON.parse(localStorage.getItem('user'));
+  const storedUser = JSON.parse(sessionStorage.getItem('user'));
   const storedId = storedUser?.userId;
   
   

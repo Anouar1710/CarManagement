@@ -7,8 +7,8 @@ const carsSchema=new mongoose.Schema({
     Model:String,
     Motorization:String,
     Color:String,
-    image:String
-    
+    image:String,
+    isCommanded:String,        
 })
 const carsModel=new mongoose.model("car",carsSchema)
 module.exports=carsModel
