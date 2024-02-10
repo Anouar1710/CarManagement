@@ -25,7 +25,7 @@ export function Carproduct(props) {
           <div className='car-property'>{props.motorization}</div>
           <div className='car-property'>{props.couleur}</div>
         </div>
-        <div className='car-price'>{props.prix}</div>
+        <div className='car-price'>{props.Price}</div>
       </div>
             <div className='action-buttons'>
 				{storedUserType === "client" ? (

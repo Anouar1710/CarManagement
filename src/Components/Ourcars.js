@@ -41,7 +41,8 @@ export const Ourcars = () => {
                         Brand={car.Brand} 
                         couleur={car.Color} 
                         model = {car.Model}
-                        motorization = {car.Motorization}                     
+                        motorization = {car.Motorization}  
+                        Price = {car.Price}                   
                         />
                         
                      ):
@@ -54,6 +55,7 @@ export const Ourcars = () => {
                      couleur={car.Color} 
                      model = {car.Model}
                      motorization = {car.Motorization}
+                     Price = {car.Price}
                      />)
                     
                    

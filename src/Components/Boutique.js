@@ -49,7 +49,7 @@ const Boutique = () => {
                         couleur={car.Color} 
                         model = {car.Model}
                         motorization = {car.Motorization}                     
-                        prix="190.000 DA" 
+                        Price = {car.Price}   
                         />
                         
                      ):
@@ -62,7 +62,7 @@ const Boutique = () => {
                      couleur={car.Color} 
                      model = {car.Model}
                      motorization = {car.Motorization}
-                     prix="190.000 DA" />)
+                     Price = {car.Price}  />)
                     
                    
                 ))}

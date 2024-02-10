@@ -77,6 +77,7 @@ const ManageCars = () => {
               <p className="text-lg "> Model : {car.Model}</p>
               <p className="text-lg "> Motorization : {car.Motorization}</p>
               <p className="text-lg "> Color : {car.Color}</p>
+              <p className="text-lg "> Color : {car.Price}</p>
               <div className="mt-4">
                 <button
                   className="bg-red-500 text-white py-2 px-4 rounded hover:bg-red-600"

@@ -8,6 +8,7 @@ const carsSchema=new mongoose.Schema({
     Motorization:String,
     Color:String,
     image:String,
+    Price:Number,
     isCommanded:String,        
 })
 const carsModel=new mongoose.model("car",carsSchema)

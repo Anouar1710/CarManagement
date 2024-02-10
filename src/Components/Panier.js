@@ -60,6 +60,7 @@ const Panier = () => {
                         couleur={car.Color} 
                         model = {car.Model}
                         motorization = {car.Motorization}    
+                        Price = {car.Price}  
                         isInPanier = {true}                 
 						/>
                         
@@ -73,6 +74,7 @@ const Panier = () => {
                      couleur={car.Color} 
                      model = {car.Model}
                      motorization = {car.Motorization}
+                     Price = {car.Price}  
                      isInPanier = {true}
                      />)
                     

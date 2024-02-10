@@ -126,6 +126,7 @@ const Cars = () => {
                     <p className="text-lg "> Model : {car.model}</p>
                     <p className="text-lg "> Motorisation : {car.motorisation}</p>
                     <p className="text-lg "> Color : {car.Color}</p>
+                    <p className="text-lg "> Color : {car.Price}</p>
                     <div className="mt-4">
                       <button
                           className="bg-blue-500 text-white py-2 px-4 rounded mr-2 hover:bg-blue-600 flex"

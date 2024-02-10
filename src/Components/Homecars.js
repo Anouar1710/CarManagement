@@ -21,7 +21,7 @@ export function Homecars(props) {
           <div className='car-property'>{props.model}</div>
           <div className='car-property'>{props.motorization}</div>
         </div>
-        <div className='car-price'>{props.prix}</div>
+        <div className='car-price'>{props.Price}</div>
       </div>
             <div className='action-buttons'>																			
 					<button className="voir-annonce voir-annonce-button">

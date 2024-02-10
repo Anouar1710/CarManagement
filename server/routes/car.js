@@ -18,7 +18,7 @@ router.post('/upload-car', upload.single('image'), async function (req, res, nex
 	console.log('Received request to add car:', req.body); 
   try {
 	const idVendeur  = req.query.id;	
-    const { Brand, Model, Motorization, Color } = req.body;
+    const { Brand, Model, Motorization, Color, Price } = req.body;
     const isCommanded = "false";
     let imageName = null;
 
@@ -33,6 +33,7 @@ router.post('/upload-car', upload.single('image'), async function (req, res, nex
       Motorization,
       Color,
       idV: idVendeur,
+      Price,
       isCommanded: isCommanded,
     });
 
@@ -46,7 +47,7 @@ router.post('/update-car', upload.single('image'), async function (req, res, nex
 	console.log('Received request to add car:', req.body); 
   const {id}= req.query
   try {
-    const { Brand, Model, Motorization, Color } = req.body;
+    const { Brand, Model, Motorization, Color, Price } = req.body;
     let imageName = null;
 
     if (req.file) {
@@ -59,6 +60,7 @@ router.post('/update-car', upload.single('image'), async function (req, res, nex
       Model:Model,
       Motorization: Motorization,
       Color:Color,
+      Price,
     },
     {new:true}
     );

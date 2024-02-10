@@ -14,7 +14,8 @@ const Formcars = ({addCar,data,setIsAddingCar,updateCars,setSelectedCar}) => {
         Model: data? data.Model:'',
         Motorization:data? data.Motorization: '',
         Color:data? data.Color: '',
-        image: data? data.image: ''
+        image: data? data.image: '',
+        Price: data? data.Price: ''
       });
     
     const handleChange = (e) => {
@@ -123,6 +124,20 @@ return (
           className="mt-1 p-2 w-full border rounded-md focus:outline-none focus:border-indigo-500"
           onChange={handleChange}
           value={Data.Color}
+          required
+        />
+      </div>
+      <div className="mb-4">
+        <label htmlFor="Price" className="block text-sm font-medium text-white">
+          Price
+        </label>
+        <input
+          type="text"
+          id="Price"
+          name="Price"
+          className="mt-1 p-2 w-full border rounded-md focus:outline-none focus:border-indigo-500"
+          onChange={handleChange}
+          value={Data.Price}
           required
         />
       </div>
